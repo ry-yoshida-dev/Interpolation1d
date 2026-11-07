@@ -3,11 +3,12 @@ revision = 3
 requires-python = ">=3.12"
 resolution-markers = [
     "python_full_version >= '3.15'",
-    "python_full_version < '3.15'",
+    "python_full_version == '3.14.*'",
+    "python_full_version < '3.14'",
 ]
 
 [options]
-exclude-newer = "2026-10-31T12:37:07.59611Z"
+exclude-newer = "2026-10-31T13:35:02.870465Z"
 exclude-newer-span = "P7D"
 
 [[package]]
@@ -206,8 +207,12 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "numpy", specifier = ">=2.2" },
-    { name = "scipy", specifier = ">=1.15" },
+    { name = "numpy", marker = "python_full_version < '3.14'", specifier = ">=2.2" },
+    { name = "numpy", marker = "python_full_version == '3.14.*'", specifier = ">=2.3.2" },
+    { name = "numpy", marker = "python_full_version >= '3.15'", specifier = ">=2.5.2" },
+    { name = "scipy", marker = "python_full_version < '3.14'", specifier = ">=1.16" },
+    { name = "scipy", marker = "python_full_version == '3.14.*'", specifier = ">=1.16.1" },
+    { name = "scipy", marker = "python_full_version >= '3.15'", specifier = ">=1.18.1" },
 ]
 
 [package.metadata.requires-dev]
@@ -217,7 +222,7 @@ dev = [
     { name = "mypy", specifier = ">=2.4" },
     { name = "pytest", specifier = ">=9.2" },
     { name = "ruff", specifier = ">=0.17" },
-    { name = "scipy-stubs", specifier = ">=1.15" },
+    { name = "scipy-stubs", specifier = ">=1.16" },
 ]
 
 [[package]]
