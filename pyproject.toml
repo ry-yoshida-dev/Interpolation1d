@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "interpolation-1d"
+version = "0.0.1"
+authors = [
+  { name = "Ryuto Yoshida" },
+]
+description = "Fill gaps in irregularly observed array series with linear, step, and spline interpolation."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Typing :: Typed",
+]
+dependencies = [
+    "numpy>=2.2",
+    "scipy>=1.15",
+]
+
+[project.urls]
+Homepage = "https://github.com/ry-yoshida-dev/Interpolation1d"
+"Bug Tracker" = "https://github.com/ry-yoshida-dev/Interpolation1d/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pyright]
+exclude = [".venv", "build", "docs"]
+
+[tool.mypy]
+mypy_path = "src"
+files = ["src", "tests"]
+explicit_package_bases = true
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "src"]
+filterwarnings = ["error"]
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.40",
+    "hypothesis>=6.170",
+    "mypy>=2.4",
+    "pytest>=9.2",
+    "ruff>=0.17",
+    "scipy-stubs>=1.15",
+]
+
+[tool.uv]
+exclude-newer = "7 days"
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "D"]
+# Only public classes, methods, and functions need docstrings, and multi-line ones are the local style.
+ignore = ["E501", "D100", "D104", "D105", "D200"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]
